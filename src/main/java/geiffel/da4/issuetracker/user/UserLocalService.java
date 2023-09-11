@@ -47,7 +47,7 @@ public class UserLocalService extends LocalService<User, Long> implements UserSe
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id) throws ResourceNotFoundException {
         IndexAndValue<User> found = this.findById(id);
         this.allValues.remove(found.value());
     }
