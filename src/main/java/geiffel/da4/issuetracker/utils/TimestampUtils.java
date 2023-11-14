@@ -1,4 +1,4 @@
-package fr.geiffel.issuetracker.utils;
+package geiffel.da4.issuetracker.utils;
 
 import java.sql.Timestamp;
 import java.util.Objects;

@@ -51,7 +51,6 @@ public class UserServiceTest {
     @Test
     void whenCreatingWithSameId_shouldReturnEmpty() {
         User same_user = users.get(0);
-
         assertThrows(ResourceAlreadyExistsException.class, ()->userService.create(same_user));
     }
 
@@ -59,7 +58,6 @@ public class UserServiceTest {
     void whenUpdating_shouldModifyUser() {
         User initial_user = users.get(2);
         User new_user = new User(initial_user.getId(), "Updaté", initial_user.getFonction());
-
         userService.update(new_user.getId(), new_user);
         User updated_user = userService.getById(initial_user.getId());
         assertEquals(new_user, updated_user);
@@ -69,8 +67,7 @@ public class UserServiceTest {
     @Test
     void whenUpdatingNonExisting_shouldThrowException() {
         User user = users.get(2);
-
-       assertThrows(ResourceNotFoundException.class, ()->userService.update(75L, user));
+        assertThrows(ResourceNotFoundException.class, ()->userService.update(75L, user));
     }
 
     @Test
@@ -85,6 +82,7 @@ public class UserServiceTest {
     @Test
     void whenDeletingNonExisting_shouldThrowException() {
         Long id = 68L;
+
 
         assertThrows(ResourceNotFoundException.class, ()->userService.delete(id));
     }
