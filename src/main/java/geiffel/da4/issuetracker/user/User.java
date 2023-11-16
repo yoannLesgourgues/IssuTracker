@@ -1,14 +1,11 @@
 package geiffel.da4.issuetracker.user;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import geiffel.da4.issuetracker.commentaire.Commentaire;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,13 +75,14 @@ public class User {
 
 
     @Override
-    public boolean equals(Object obj) {
-        if (getClass() != obj.getClass()){
-            return false;
-        }
-        User comparing = (User) obj;
-        return Objects.equals(this.id, comparing.getId()) &&
-            this.nom.equals(comparing.getNom()) &&
-            this.fonction == comparing.getFonction();
+    public int hashCode() {
+        return Objects.hash(getId(), getNom(), getFonction(), getCommentaireEcrits());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return Objects.equals(getId(), user.getId()) && Objects.equals(getNom(), user.getNom()) && getFonction() == user.getFonction() && Objects.equals(getCommentaireEcrits(), user.getCommentaireEcrits());
     }
 }
